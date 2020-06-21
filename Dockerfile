@@ -13,7 +13,7 @@ RUN requirements="nano cron mysql-client-5.5 libpng12-dev libmcrypt-dev libmcryp
     && requirementsToRemove="libpng12-dev libmcrypt-dev libcurl3-dev libxml2-dev libpng12-dev libfreetype6-dev libjpeg62-turbo-dev" \
     && apt-get purge --auto-remove -y $requirementsToRemove
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/C=FR/ST=Nord/L=Lille/O=Effid/OU=IT/CN=effid.local"
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/server.key -out /etc/ssl/server.crt -subj "/C=FR/ST=Nord/L=Lille/O=Effid/OU=IT/CN=effid.local"
 
 COPY effid.conf /etc/apache2/sites-enabled/effid.conf
 RUN a2enmod rewrite
