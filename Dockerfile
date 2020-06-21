@@ -15,7 +15,7 @@ RUN requirements="nano cron mysql-client-5.5 libpng12-dev libmcrypt-dev libmcryp
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/C=FR/ST=Nord/L=Lille/O=Effid/OU=IT/CN=effid.local"
 
-COPY dev.conf /etc/apache2/sites-enabled/dev.conf
+COPY effid.conf /etc/apache2/sites-enabled/effid.conf
 RUN a2enmod rewrite
 RUN a2ensite default-ssl
 RUN a2enmod ssl
