@@ -5,7 +5,6 @@ FROM ulsmith/rpi-raspbian-apache-php
 
 # RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/server.key -out /etc/ssl/server.crt -subj "/C=FR/ST=Nord/L=Lille/O=Effid/OU=IT/CN=effid.local"
 
-RUN rm /var/www/html/index.html
 COPY effid.conf /etc/apache2/sites-enabled/effid.conf
 COPY src/ /var/www/html/
 
