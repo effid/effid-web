@@ -16,3 +16,5 @@ RUN a2enmod ssl
 RUN chmod -R 0755 /var/www/html
 EXPOSE 80
 EXPOSE 443
+
+CMD ["/run.sh"]
