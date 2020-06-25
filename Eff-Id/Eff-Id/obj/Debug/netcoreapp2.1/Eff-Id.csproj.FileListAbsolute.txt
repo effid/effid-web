@@ -1,0 +1,6 @@
+C:\Users\loick\Documents\Cours\Projet\WEB\Eff-Id\Eff-Id\obj\Debug\netcoreapp2.1\RefitStubs.g.cs
+C:\Users\loick\Documents\Cours\Projet\WEB\Eff-Id\Eff-Id\obj\Debug\netcoreapp2.1\Eff-Id.csproj.CoreCompileInputs.cache
+C:\Users\loick\Documents\Cours\Projet\WEB\Eff-Id\Eff-Id\obj\Debug\netcoreapp2.1\Eff-Id.RazorAssemblyInfo.cache
+C:\Users\loick\Documents\Cours\Projet\WEB\Eff-Id\Eff-Id\obj\Debug\netcoreapp2.1\Eff-Id.RazorAssemblyInfo.cs
+C:\Users\loick\Documents\Cours\Projet\WEB\Eff-Id\Eff-Id\obj\Debug\netcoreapp2.1\Eff-Id.AssemblyInfoInputs.cache
+C:\Users\loick\Documents\Cours\Projet\WEB\Eff-Id\Eff-Id\obj\Debug\netcoreapp2.1\Eff-Id.AssemblyInfo.cs

@@ -1,0 +1,45 @@
+﻿@model EffId.Models.RoomViewModel
+
+@{
+    ViewData["Title"] = "Classroom";
+}
+
+<h2>Classroom</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th style="width: 10px">#</th>
+            <th scope="col" class="">Numero Salle</th>
+            <th scope="col">Capacité</th>
+            <th scope="col">Type</th>
+            <th scope="col">Etage</th>
+            <th scope="col">Disponibilité</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model?.Rooms != null)
+        {
+            @foreach (var room in Model.Rooms)
+            {
+                <tr>
+                    <td scope="row">@room.Id_salle</td>
+                    <td>@room.Numero_Salle</td>
+                    <td>@room.Capacite</td>
+                    <td>@room.Type</td>
+                    <td>@room.Etage</td>
+                    @if (@room.Occupee == 0)
+                    {
+                        <td>Libre</td>
+
+                    }
+                    else
+                    {
+                        <td>Occupée</td>
+
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>

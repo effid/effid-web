@@ -1,0 +1,51 @@
+﻿@model EffId.Models.ScheduleViewModel
+
+@{
+    ViewData["Title"] = "Schedules";
+}
+
+<section id="calendar"></section>
+
+
+@section Scripts {
+    <script>
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listWeek'
+            },
+            defaultDate: '2020-06-16',
+            navLinks: true,
+            eventLimit: true,
+            events: [{
+                title: '19-20_CSIA',
+                start: '2020-06-16',
+                end: '2020-06-18'
+            },
+            {
+                title: '18-20_SIO',
+                start: '2020-06-20',
+                allDay: true
+            },
+            {
+                title: '18-20_DG',
+                start: '2020-06-14T09:00:00',
+                end: '2020-06-14T11:00:00'
+            },
+            {
+                title: '18-20_DE',
+                start: '2020-06-21T19:00:00',
+                end: '2020-06-21T22:00:00'
+            },
+            {
+                title: '17-20_EEI',
+                start: '2020-06-15',
+                allDay: true
+            },
+            ]
+        });
+    </script>
+}
+
+
