@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . ./
 
-RUN dotnet restore ./Effid.csproj
+RUN dotnet restore ./*.csproj
 
 RUN dotnet publish -c release -o published -r linux-arm
 
