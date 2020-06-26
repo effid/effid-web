@@ -3,11 +3,10 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 WORKDIR /app
 
+COPY . ./
 
 RUN dotnet restore ./Effid.csproj
 
-
-COPY . ./
 RUN dotnet publish -c release -o published -r linux-arm
 
 FROM microsoft/dotnet:2.0.0-runtime-stretch-arm32v7
