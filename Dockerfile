@@ -1,12 +1,13 @@
 FROM httpd:2.4.43-alpine
-EXPOSE 8080
 EXPOSE 80
 EXPOSE 443
 
 #COPY ./overlay ./overlay-arm32v6 /
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+
 RUN apk update && apk upgrade
 RUN apk add php7-apache2 curl ca-certificates openssl openssh git php7 php7-phar php7-json php7-iconv php7-openssl tzdata
+
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 RUN apk add \
 	php7-ftp \
@@ -52,14 +53,12 @@ RUN cp /usr/bin/php7 /usr/bin/php \
     && rm -f /var/cache/apk/*
 
 # RUN service apache2 restart
-RUN apachectl -k restart
 RUN php -v
-# RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/server.key -out /etc/ssl/server.crt -subj "/C=FR/ST=Nord/L=Lille/O=Effid/OU=IT/CN=effid.local"
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /usr/local/apache2/conf/server.key -out /usr/local/apache2/conf/server.crt -subj "/C=FR/ST=Nord/L=Lille/O=Effid/OU=IT/CN=effid.local"
 
 COPY httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY src/ /usr/local/apache2/htdocs/
 
-# RUN a2enmod rewrite
-# RUN a2ensite default-ssl
-# RUN a2enmod ssl
-
+ADD start.sh /
+RUN chmod +x /start.sh
+ENTRYPOINT ["/start.sh"]
