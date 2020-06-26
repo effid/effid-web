@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch-slim-arm32v7 as builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch-arm32v7 as builder
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 WORKDIR /app
