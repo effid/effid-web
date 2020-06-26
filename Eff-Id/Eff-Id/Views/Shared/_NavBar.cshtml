@@ -1,9 +1,11 @@
-﻿  <!-- Navbar -->
+﻿@using Microsoft.AspNetCore.Http;
+
+<!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-        <a href="../../index3.html" class="navbar-brand">
-            <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                 style="opacity: .8; margin-top: 6px;">
+        <a class="navbar-brand">
+            <img src="~/images/Logo_Trans.png" alt="Eff-ID" class="brand-image elevation-3"
+                 style="opacity: .8; margin-top: 6px; height: 6vh">
         </a>
 
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,48 +15,59 @@
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="/" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-action="Room" asp-controller="Home" class="nav-link">Rooms</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-action="Schedules" asp-controller="Home" class="nav-link">Schedules</a>
-                </li>
-                @*<li class="nav-item dropdown">
-                      <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
-                      <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                          <li><a href="#" class="dropdown-item">Some action </a></li>
-                          <li><a href="#" class="dropdown-item">Some other action</a></li>
+                @if (@Context.Session.GetString("username") != null)
+                {
+                    <li class="nav-item">
+                        <a asp-action="Room" asp-controller="Home" class="nav-link">Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Schedules" asp-controller="Home" class="nav-link">Schedules</a>
+                    </li>
+                    @*<li class="nav-item dropdown">
+                          <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
+                          <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                              <li><a href="#" class="dropdown-item">Some action </a></li>
+                              <li><a href="#" class="dropdown-item">Some other action</a></li>
 
-                          <li class="dropdown-divider"></li>
+                              <li class="dropdown-divider"></li>
 
-                          <!-- Level two dropdown-->
-                          <li class="dropdown-submenu dropdown-hover">
-                              <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                              <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                                  <li>
-                                      <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                                  </li>
+                              <!-- Level two dropdown-->
+                              <li class="dropdown-submenu dropdown-hover">
+                                  <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
+                                  <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                      <li>
+                                          <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
+                                      </li>
 
-                                  <!-- Level three dropdown-->
-                                  <li class="dropdown-submenu">
-                                      <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                                      <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                          <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                          <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                      </ul>
-                                  </li>
-                                  <!-- End Level three -->
+                                      <!-- Level three dropdown-->
+                                      <li class="dropdown-submenu">
+                                          <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
+                                          <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
+                                              <li><a href="#" class="dropdown-item">3rd level</a></li>
+                                              <li><a href="#" class="dropdown-item">3rd level</a></li>
+                                          </ul>
+                                      </li>
+                                      <!-- End Level three -->
 
-                                  <li><a href="#" class="dropdown-item">level 2</a></li>
-                                  <li><a href="#" class="dropdown-item">level 2</a></li>
-                              </ul>
-                          </li>
-                          <!-- End Level two -->
-                      </ul>
-                    </li>*@
+                                      <li><a href="#" class="dropdown-item">level 2</a></li>
+                                      <li><a href="#" class="dropdown-item">level 2</a></li>
+                                  </ul>
+                              </li>
+                              <!-- End Level two -->
+                          </ul>
+                        </li>*@
+
+                    <li class="nav-item nav-link">
+
+                        @Context.Session.GetString("username")
+                    </li>
+                    <li class="nav-item nav-link">
+                        <form method="get">
+                            <span><a asp-action="Logout" asp-controller="Home">Logout</a></span>
+                        </form>
+                    </li>
+
+                }
             </ul>
         </div>
     </div>

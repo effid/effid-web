@@ -11,10 +11,7 @@ namespace Eff_Id.API
         [Get("/salles")]
         Task<List<RoomViewModel>> GetClassRoomList();
 
-        [Get("/connexion/{email}/{password}")]
-        Task<UserViewModel> GetUser(string email, string password);
-
-
+        
         [Post("/inscription")]
         Task<UserViewModel> CreateUser(UserViewModel user);
     }

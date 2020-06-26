@@ -8,26 +8,50 @@ using Eff_Id.Models;
 using Refit;
 using Eff_Id.API;
 using EffId.Models;
+using Microsoft.AspNetCore.Http;
+using EffId.API;
 
 namespace Eff_Id.Controllers
 {
 
     public class HomeController : Controller
     {
-
+        [HttpGet]
         public async Task<IActionResult> Index(
             UserViewModel input)
         {
-            var effApi = RestService.For<IEffApi>("http://82.64.156.248:10000");
-
-            if(input.Email != null && input.Password != null)
-            {
-                var test = await effApi.GetUser(input.Email, input.Password);
-                return View("Schedules");
-
-            }
-
             return View();
+        }
+
+        [Route("login")]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Login(
+            UserViewModel input)
+        {
+            var effApi = RestService.For<IUserApi>("http://82.64.156.248:10000");
+            var apiResponse = effApi.GetUser(input.Email, input.Password);
+
+            var responseStatus = apiResponse.IsCompletedSuccessfully;
+
+            if (responseStatus)
+            {
+                if (input.Email != null && input.Password != null)
+                {
+                    HttpContext.Session.SetString("username", input.Email);
+                    return View("Schedules");
+                }
+                else
+                {
+                    ViewBag.error = "Invalid Account";
+                    return View("Index");
+                }
+            }
+            ViewBag.error = "Invalid Account";
+            return View("Index");
+
         }
 
         public async Task<IActionResult> AccountCreationAsync(
@@ -37,7 +61,6 @@ namespace Eff_Id.Controllers
 
             if (input.Prenom != null && input.Nom != null && input.Email != null && input.Password != null)
             {
-
                 UserViewModel user = new UserViewModel()
                 {
                     Email = input.Email,
@@ -45,7 +68,7 @@ namespace Eff_Id.Controllers
                     Password = input.Password,
                     Prenom = input.Prenom,
                     id_classe = null,
-                    id_puce = 0, 
+                    id_puce = 0,
                     id_type = 1,
                 };
 
@@ -71,15 +94,15 @@ namespace Eff_Id.Controllers
                 Rooms = test,
             };
 
-
             return View(classe);
         }
 
-        public IActionResult Contact()
+        [Route("logout")]
+        [HttpGet]
+        public IActionResult Logout()
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            HttpContext.Session.Remove("username");
+            return RedirectToAction("Index");
         }
     }
 }

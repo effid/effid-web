@@ -15,6 +15,5 @@
         public int id_type { get; set; }
 
         public string id_classe { get; set; }
-
     }
 }
