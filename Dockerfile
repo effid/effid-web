@@ -9,7 +9,7 @@ RUN dotnet restore ./*.csproj
 
 RUN dotnet publish -c release -o published -r linux-arm
 
-FROM microsoft/dotnet:2.1-stretch-slim-arm32v7
+FROM mcr.microsoft.com/dotnet/core/runtime/dotnet:2.1-stretch-slim-arm32v7
 
 WORKDIR /app
 COPY --from=build-env /app/out .
