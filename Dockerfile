@@ -12,5 +12,5 @@ RUN dotnet publish -c release -o published -r linux-arm
 FROM mcr.microsoft.com/dotnet/core/runtime:2.1-stretch-slim-arm32v7
 
 WORKDIR /app
-COPY --from=build-env /app/out .
+# COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "Effid.dll"]
