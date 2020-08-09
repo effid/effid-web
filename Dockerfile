@@ -1,16 +1,21 @@
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.1 AS base
+WORKDIR /app
+EXPOSE 5051
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS build
-ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
+WORKDIR /src
 
+COPY *.csproj ./
+RUN dotnet restore "Effid.csproj"
+WORKDIR "/src/effid"
+COPY . .
+WORKDIR "/src/effid"
+RUN dotnet build "Effid.csproj" -c Release -o /app
+
+FROM build AS publish
+RUN dotnet publish "Effid.csproj" -c Release -o /app
+
+FROM base AS final
 WORKDIR /app
+COPY --from=publish /app .
 
-COPY . ./
-
-RUN dotnet restore ./*.csproj
-
-RUN dotnet publish -c release -o published -r linux-arm
-
-FROM mcr.microsoft.com/dotnet/core/runtime:2.1-stretch-slim-arm32v7 AS runtime
-
-WORKDIR /app
-COPY --from=build /app/published .
 ENTRYPOINT ["dotnet", "Effid.dll"]
